@@ -1,0 +1,43 @@
+{
+  "predict": {
+    "traces": [],
+    "train": [],
+    "demos": [],
+    "signature": {
+      "instructions": "Given the fields `prompt`, produce the fields `answer`.\n\nThe answer should be a direct and accurate response to the prompt, adhering to the following guidelines to ensure alignment with expected reference answers:\n1.  **Extreme Conciseness:** Provide the most direct answer possible without unnecessary elaboration, introductory phrases, or filler words (e.g., use \"Hello!\" instead of \"Hello there!\").\n2.  **Standard Naming Conventions:** When writing code or defining functions, use the shortest, most standard naming conventions (e.g., use `add` rather than `add_numbers`).\n3.  **No Markdown Formatting:** Do not use Markdown syntax, including code blocks (triple backticks). Output code and text as plain content only.\n4.  **Factual Alignment:** Ensure the content is factually correct and matches the expected output style strictly.",
+      "fields": [
+        {
+          "prefix": "Prompt:",
+          "description": "${prompt}"
+        },
+        {
+          "prefix": "Reasoning:",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Answer:",
+          "description": "${answer}"
+        }
+      ]
+    },
+    "lm": {
+      "model": "openai/z-ai/glm-4.7",
+      "model_type": "chat",
+      "cache": true,
+      "num_retries": 3,
+      "finetuning_model": null,
+      "launch_kwargs": {},
+      "train_kwargs": {},
+      "temperature": 0.7,
+      "max_tokens": 1024,
+      "api_base": "https://openrouter.ai/api/v1"
+    }
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.12",
+      "dspy": "3.2.0",
+      "cloudpickle": "3.1"
+    }
+  }
+}

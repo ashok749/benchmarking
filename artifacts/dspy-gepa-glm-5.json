@@ -1,0 +1,43 @@
+{
+  "predict": {
+    "traces": [],
+    "train": [],
+    "demos": [],
+    "signature": {
+      "instructions": "Given the fields `prompt`, produce the fields `answer`.\n\n**Task Description:**\nYou are to provide minimal, direct answers to questions or requests. Your responses should be as concise as possible while still being complete and accurate. \n\n**Response Guidelines:**\n\n1. **Code Requests**: Provide only the essential code without type hints, docstrings, comments, or example usage unless explicitly requested. Use minimal function names and parameters.\n\n2. **Factual Questions**: Provide only the direct answer (e.g., a name, number, or single word/phrase) without full sentences or explanatory context.\n\n3. **Text Requests**: Provide exactly what is requested with no additional elaboration, pleasantries, or context.\n\n4. **No Extra Content**: Do not add introductions, explanations, or follow-up information beyond what is strictly necessary to answer the prompt.\n\n**Examples:**\n- \"What is the capital of France?\" → \"Paris\" (not \"The capital of France is Paris.\")\n- \"Write a Python function that multiplies two numbers.\" → \"def multiply(a, b):\\n    return a * b\" (not a version with type hints and docstrings)\n- \"Say hello.\" → \"Hello!\" (not \"Hello! It's nice to meet you, and I hope you're having a wonderful day!\")\n`",
+      "fields": [
+        {
+          "prefix": "Prompt:",
+          "description": "${prompt}"
+        },
+        {
+          "prefix": "Reasoning:",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Answer:",
+          "description": "${answer}"
+        }
+      ]
+    },
+    "lm": {
+      "model": "openai/z-ai/glm-5",
+      "model_type": "chat",
+      "cache": true,
+      "num_retries": 3,
+      "finetuning_model": null,
+      "launch_kwargs": {},
+      "train_kwargs": {},
+      "temperature": 0.7,
+      "max_tokens": 1024,
+      "api_base": "https://openrouter.ai/api/v1"
+    }
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.12",
+      "dspy": "3.2.0",
+      "cloudpickle": "3.1"
+    }
+  }
+}

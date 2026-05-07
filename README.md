@@ -1,0 +1,117 @@
+# DSPy OpenAI Endpoint
+
+A small OpenAI-compatible FastAPI service for serving DSPy strategies against OpenRouter-backed models.
+
+## Included strategies
+
+- `base`: single DSPy `ChainOfThought` call
+- `best_of_n`: DSPy `BestOfN` wrapper around the same program
+- `gepa`: serves a previously compiled GEPA artifact
+
+## Preconfigured model aliases
+
+- `dspy-base-glm-5`
+- `dspy-base-glm-4.7`
+- `dspy-base-minimax-m2.7`
+- `dspy-base-minimax-m2.5`
+- `dspy-bestofn-glm-5`
+- `dspy-bestofn-glm-4.7`
+- `dspy-bestofn-minimax-m2.7`
+- `dspy-bestofn-minimax-m2.5`
+- `dspy-gepa-glm-5`
+- `dspy-gepa-glm-4.7`
+- `dspy-gepa-minimax-m2.7`
+- `dspy-gepa-minimax-m2.5`
+
+## Environment
+
+Create a `.env` file in this folder or export variables in your shell.
+
+```bash
+OPENROUTER_API_KEY=your_openrouter_key
+DSPY_ENDPOINT_API_KEY=optional_incoming_bearer_token
+DSPY_UPSTREAM_API_BASE=https://openrouter.ai/api/v1
+DSPY_BEST_OF_N=3
+DSPY_BEST_OF_N_THRESHOLD=0.85
+```
+
+## Install
+
+```bash
+cd /home/ashok/Downloads/web-bench-main/tools/dspy-openai-endpoint
+/home/ashok/Downloads/web-bench-main/.venv/bin/python -m pip install -e .
+```
+
+## Run the endpoint
+
+```bash
+cd /home/ashok/Downloads/web-bench-main/tools/dspy-openai-endpoint
+/home/ashok/Downloads/web-bench-main/.venv/bin/python -m uvicorn dspy_openai_endpoint.main:app --host 0.0.0.0 --port 8000
+```
+
+## Train GEPA artifacts
+
+This is an offline step. It compiles an optimized prompt/program and stores it under `artifacts/`.
+
+```bash
+cd /home/ashok/Downloads/web-bench-main/tools/dspy-openai-endpoint
+/home/ashok/Downloads/web-bench-main/.venv/bin/python train_gepa.py --alias dspy-gepa-glm-5 --auto light
+/home/ashok/Downloads/web-bench-main/.venv/bin/python train_gepa.py --alias dspy-gepa-glm-4.7 --auto light
+/home/ashok/Downloads/web-bench-main/.venv/bin/python train_gepa.py --alias dspy-gepa-minimax-m2.7 --auto light
+/home/ashok/Downloads/web-bench-main/.venv/bin/python train_gepa.py --alias dspy-gepa-minimax-m2.5 --auto light
+```
+
+You can replace `data/gepa_samples.jsonl` with a benchmark-specific JSONL dataset containing `prompt` and `answer` fields.
+
+## OpenAI-compatible usage
+
+### List models
+
+```bash
+python - <<'PY'
+import os, requests
+headers = {"Authorization": f"Bearer {os.getenv('DSPY_ENDPOINT_API_KEY')}"} if os.getenv('DSPY_ENDPOINT_API_KEY') else {}
+print(requests.get('http://127.0.0.1:8000/v1/models', headers=headers).json())
+PY
+```
+
+### Chat completion
+
+```bash
+python - <<'PY'
+import os, requests
+headers = {"Content-Type": "application/json"}
+if os.getenv('DSPY_ENDPOINT_API_KEY'):
+    headers["Authorization"] = f"Bearer {os.getenv('DSPY_ENDPOINT_API_KEY')}"
+payload = {
+    "model": "dspy-bestofn-glm-5",
+    "messages": [{"role": "user", "content": "Write a Python function that returns Fibonacci numbers."}],
+    "stream": False,
+}
+response = requests.post('http://127.0.0.1:8000/v1/chat/completions', json=payload, headers=headers, timeout=180)
+print(response.json())
+PY
+```
+
+## Share through ngrok
+
+Install `ngrok` separately, then expose the local server:
+
+```bash
+ngrok http 8000
+```
+
+Share this base URL with Harness Lab:
+
+```text
+https://<ngrok-id>.ngrok-free.app/v1
+```
+
+Also share the model aliases they should call, such as `dspy-bestofn-glm-5` or `dspy-gepa-minimax-m2.7`.
+
+## Benchmark integration notes
+
+- `SWE-bench` and similar harnesses should target `POST /v1/chat/completions`.
+- Use `dspy-bestofn-*` aliases for Best-of-N tests.
+- Use `dspy-gepa-*` aliases only after training artifacts exist.
+- This scaffold currently supports non-streaming requests only.

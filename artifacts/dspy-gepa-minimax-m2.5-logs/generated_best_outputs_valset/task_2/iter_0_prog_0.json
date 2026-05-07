@@ -1,0 +1,4 @@
+{
+    "reasoning": "The user is asking for a simple Python function that takes two numbers as input and returns their sum. This is a basic programming task that requires defining a function with two parameters and returning their addition.",
+    "answer": "```python\ndef add_numbers(a, b):\n    return a + b\n```"
+}

@@ -1,0 +1,25 @@
+{"prompt": "Say hello in one sentence.", "answer": "Hello!"}
+{"prompt": "What is the capital of Belgium?", "answer": "Brussels"}
+{"prompt": "Write a Python function that adds two numbers.", "answer": "def add(a, b):\n    return a + b"}
+{"prompt": "Write a Python function to check if a string is a palindrome.", "answer": "def is_palindrome(s):\n    s = s.lower().replace(' ', '')\n    return s == s[::-1]"}
+{"prompt": "Write a Python function that returns the Fibonacci sequence up to n terms.", "answer": "def fibonacci(n):\n    a, b = 0, 1\n    result = []\n    for _ in range(n):\n        result.append(a)\n        a, b = b, a + b\n    return result"}
+{"prompt": "Write a JavaScript function to flatten a nested array.", "answer": "function flatten(arr) {\n  return arr.reduce((acc, val) => Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val), []);\n}"}
+{"prompt": "Write a SQL query to find the second highest salary from an employees table.", "answer": "SELECT MAX(salary) FROM employees WHERE salary < (SELECT MAX(salary) FROM employees);"}
+{"prompt": "Write a Python function to find all prime numbers up to n using the Sieve of Eratosthenes.", "answer": "def sieve(n):\n    is_prime = [True] * (n + 1)\n    is_prime[0] = is_prime[1] = False\n    for i in range(2, int(n**0.5) + 1):\n        if is_prime[i]:\n            for j in range(i*i, n + 1, i):\n                is_prime[j] = False\n    return [i for i in range(n + 1) if is_prime[i]]"}
+{"prompt": "What is 17 * 23?", "answer": "391"}
+{"prompt": "If a train travels at 60 km/h for 2.5 hours, how far does it travel?", "answer": "150 km"}
+{"prompt": "A store offers a 20% discount on a $150 item. What is the final price?", "answer": "$120"}
+{"prompt": "What is the derivative of x^3 + 2x^2 - 5x + 3?", "answer": "3x^2 + 4x - 5"}
+{"prompt": "Solve for x: 3x + 7 = 22", "answer": "x = 5"}
+{"prompt": "If all roses are flowers and some flowers fade quickly, can we conclude that some roses fade quickly?", "answer": "No, we cannot conclude that. The statement only says some flowers fade quickly, but those flowers might not be roses."}
+{"prompt": "A farmer has chickens and cows. He counts 20 heads and 56 legs. How many chickens and cows does he have?", "answer": "12 chickens and 8 cows. Let c=chickens, w=cows: c+w=20, 2c+4w=56. Solving: w=8, c=12."}
+{"prompt": "Summarize in one sentence: Machine learning is a subset of artificial intelligence that focuses on building systems that learn from data. Instead of being explicitly programmed, these systems improve their performance on tasks through experience.", "answer": "Machine learning is an AI subfield where systems learn and improve from data rather than explicit programming."}
+{"prompt": "Summarize in one sentence: The Great Wall of China was built over many centuries by various dynasties. It stretches over 13,000 miles and was primarily constructed to protect against invasions from northern nomadic groups.", "answer": "The Great Wall of China is a 13,000-mile fortification built across centuries to defend against northern invasions."}
+{"prompt": "Convert the following to bullet points: Python is a high-level programming language. It supports multiple paradigms including procedural, object-oriented, and functional programming. It has a large standard library.", "answer": "- Python is a high-level programming language\n- Supports multiple paradigms: procedural, object-oriented, and functional\n- Has a large standard library"}
+{"prompt": "What is the largest planet in our solar system?", "answer": "Jupiter"}
+{"prompt": "Who wrote the theory of general relativity?", "answer": "Albert Einstein"}
+{"prompt": "What programming language is primarily used for iOS app development?", "answer": "Swift"}
+{"prompt": "Explain what a REST API is in two sentences.", "answer": "A REST API is a web service interface that follows REST architectural principles, using HTTP methods like GET, POST, PUT, and DELETE to perform operations on resources. Resources are identified by URLs and data is typically exchanged in JSON format."}
+{"prompt": "Write the output of this code: print([x**2 for x in range(5)])", "answer": "[0, 1, 4, 9, 16]"}
+{"prompt": "What is the time complexity of binary search?", "answer": "O(log n)"}
+{"prompt": "Write a Python one-liner to reverse a string.", "answer": "reversed_str = s[::-1]"}

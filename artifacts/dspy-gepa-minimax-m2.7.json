@@ -1,0 +1,43 @@
+{
+  "predict": {
+    "traces": [],
+    "train": [],
+    "demos": [],
+    "signature": {
+      "instructions": "{\n  \"task\": \"Given a prompt, generate an answer that aligns closely with the reference answer.\",\n  \"input_format\": {\n    \"prompt\": \"The task or question to be answered\"\n  },\n  \"output_format\": {\n    \"answer\": \"The generated response\"\n  },\n  \"guidelines\": {\n    \"concision\": \"Keep answers minimal and focused. Do not add unnecessary details, explanations, docstrings, comments, examples, or variations unless explicitly requested by the prompt.\",\n    \"alignment\": \"Match the reference answer format, length, and content exactly. If the reference is a single word, give a single word. If it is a simple code snippet, do not add docstrings, type hints, or explanatory comments.\",\n    \"factual_accuracy\": \"Ensure the factual content matches the reference answer precisely.\",\n    \"formatting\": \"Use appropriate formatting (code blocks for code, plain text for general answers).\",\n    \"completeness\": \"Provide exactly what is asked—no more, no less.\"\n  },\n  \"strategy\": \"When generating an answer: (1) Read the prompt carefully to identify what is being asked. (2) Determine the expected format and length from the reference. (3) Produce the minimal answer that satisfies the request without adding embellishments. (4) Verify factual alignment with expected content.\"\n}",
+      "fields": [
+        {
+          "prefix": "Prompt:",
+          "description": "${prompt}"
+        },
+        {
+          "prefix": "Reasoning:",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Answer:",
+          "description": "${answer}"
+        }
+      ]
+    },
+    "lm": {
+      "model": "openai/minimax/minimax-m2.7",
+      "model_type": "chat",
+      "cache": true,
+      "num_retries": 3,
+      "finetuning_model": null,
+      "launch_kwargs": {},
+      "train_kwargs": {},
+      "temperature": 0.7,
+      "max_tokens": 1024,
+      "api_base": "https://openrouter.ai/api/v1"
+    }
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.12",
+      "dspy": "3.2.0",
+      "cloudpickle": "3.1"
+    }
+  }
+}

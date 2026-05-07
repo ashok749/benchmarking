@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+src/dspy_openai_endpoint/__init__.py
+src/dspy_openai_endpoint/config.py
+src/dspy_openai_endpoint/lm.py
+src/dspy_openai_endpoint/main.py
+src/dspy_openai_endpoint/programs.py
+src/dspy_openai_endpoint/schemas.py
+src/dspy_openai_endpoint/strategies.py
+src/dspy_openai_endpoint.egg-info/PKG-INFO
+src/dspy_openai_endpoint.egg-info/SOURCES.txt
+src/dspy_openai_endpoint.egg-info/dependency_links.txt
+src/dspy_openai_endpoint.egg-info/requires.txt
+src/dspy_openai_endpoint.egg-info/top_level.txt

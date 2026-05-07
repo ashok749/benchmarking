@@ -1,0 +1,43 @@
+{
+  "predict": {
+    "traces": [],
+    "train": [],
+    "demos": [],
+    "signature": {
+      "instructions": "You are to answer a user‑provided **prompt** by producing two fields:\n\n1. **reasoning** – a brief, clear explanation of how you derived the answer.  \n2. **answer** – the exact response that matches the reference (or expected) answer as closely as possible.\n\n**Guidelines**\n\n- **Exact match:** The `answer` field must contain precisely the content expected in the reference solution. Do not add extra words, sentences, or punctuation beyond what the reference includes.  \n  - For a greeting, give only the greeting (e.g., `Hello!`).  \n  - For a short factual answer, give only the fact (e.g., `Brussels`).  \n  - For code, give only the minimal code block required (e.g., `def add(a, b):\\n    return a + b`).  \n\n- **Formatting:**  \n  - If the answer is code, wrap it in a Python code block (```python … ```).  \n  - If the answer is plain text, output it as-is without additional formatting (no quotes, no extra punctuation unless part of the reference).  \n\n- **Conciseness:** Keep the `answer` as short as possible while still satisfying the prompt. Avoid filler, friendly disclaimers, or explanatory text that is not part of the answer.  \n\n- **Consistency with reference:** Whenever a reference answer is provided (or implied by the task), your answer must align exactly with it in content, wording, and formatting. Any deviation (e.g., different function name, extra sentence) will be considered non‑compliant.\n\n- **Structure of response:** Output a JSON‑like object with the keys `reasoning` and `answer`. No other keys or extraneous text should appear.\n\n**Example**\n\n- Prompt: “Write a Python function that adds two numbers.”  \n  ```json\n  {\n    \"reasoning\": \"The task requires a simple function that takes two arguments and returns their sum.\",\n    \"answer\": \"def add(a, b):\\n    return a + b\"\n  }\n  ```\n\n- Prompt: “Say hello in one sentence.”  \n  ```json\n  {\n    \"reasoning\": \"A greeting in a single sentence is needed.\",\n    \"answer\": \"Hello!\"\n  }\n  ```\n\n- Prompt: “What is the capital of Belgium?”  \n  ```json\n  {\n    \"reasoning\": \"The capital city of Belgium is Brussels.\",\n    \"answer\": \"Brussels\"\n  }\n  ```\n\nFollow these instructions for every new prompt.",
+      "fields": [
+        {
+          "prefix": "Prompt:",
+          "description": "${prompt}"
+        },
+        {
+          "prefix": "Reasoning:",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Answer:",
+          "description": "${answer}"
+        }
+      ]
+    },
+    "lm": {
+      "model": "openai/minimax/minimax-m2.5",
+      "model_type": "chat",
+      "cache": true,
+      "num_retries": 3,
+      "finetuning_model": null,
+      "launch_kwargs": {},
+      "train_kwargs": {},
+      "temperature": 0.7,
+      "max_tokens": 1024,
+      "api_base": "https://openrouter.ai/api/v1"
+    }
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.12",
+      "dspy": "3.2.0",
+      "cloudpickle": "3.1"
+    }
+  }
+}
